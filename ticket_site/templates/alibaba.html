@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Alibaba Form</title>
+    <title>فرم بلیط علی بابا</title>
     <style>
         /* Global dark background with a subtle gradient */
         body {
-            background: linear-gradient(to right, #141E30, #243B55);
+            background: linear-gradient(to right, #E3A107, #FEDA32);
             font-family: 'Peyda', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            color: #f1f1f1;
+            color: darkgray;
         }
 
         /* Dark, rounded form container */
         .form-container {
-            background: #2C2C3A;
+            background: white;
             border-radius: 16px;
             padding: 30px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
             width: 400px;
-            max-width: 90%;
+            max-width: 100%;
         }
 
         /* Centered header styling */
         .form-container h2 {
             text-align: center;
             margin-bottom: 20px;
-            color: #f1f1f1;
+            color: #2b2b2b;
             font-size: 24px;
         }
 
@@ -38,8 +38,10 @@
             display: flex;
             flex-direction: column;
         }
+
         form p {
             margin-bottom: 15px;
+            color: #0b0c0c
         }
 
         /* Input styling with rounded corners and dark background */
@@ -47,21 +49,44 @@
         input[type="email"],
         input[type="number"],
         input[type="date"],
-        textarea {
+        textarea,
+        input[type="time"] {
             width: 100%;
             padding: 10px 15px;
-            background: #3A3A4A;
+            background: #ffbf27;
             border: 1px solid #555;
             border-radius: 8px;
             box-sizing: border-box;
             font-size: 14px;
-            color: #f1f1f1;
+            color: #2a2a2a;
+            transition: background 0.3s ease, border 0.3s ease;
         }
 
         /* Placeholder text color */
         input::placeholder,
         textarea::placeholder {
             color: #bbb;
+        }
+
+        /* Hover effect for the inputs */
+        input[type="text"]:hover,
+        input[type="email"]:hover,
+        input[type="number"]:hover,
+        input[type="date"]:hover,
+        input[type="time"]:hover {
+            background: #f8ae00;
+            border: 1px solid #777;
+        }
+
+        /* Focus effect for inputs */
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        input[type="time"]:focus {
+            background: #f8ae00;
+            border: 1px solid #28a745; /* Green border on focus */
+            outline: none;
         }
 
         /* Modern, rounded button styling */
@@ -76,20 +101,22 @@
             margin-top: 10px;
             transition: background 0.3s ease, transform 0.2s ease;
         }
+
         button:hover {
             background: #218838;
             transform: translateY(-2px);
         }
     </style>
 </head>
-<body>
-    <div class="form-container">
-        <h2>Fill out the form</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+<body dir="rtl">
+
+<div class="form-container">
+    <h2>فرم زیر را پر کنید</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</div>
 </body>
 </html>

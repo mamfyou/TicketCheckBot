@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .forms import TicketForm
 
@@ -7,10 +7,11 @@ def alibaba(request):
     if request.method == "POST":
         form = TicketForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data["name"]
-            email = form.cleaned_data["email"]
-            age = form.cleaned_data["age"]
-            return render(request, "success.html", {"name": name, "email": email, "age": age})
+            date = form.cleaned_data["date"]
+            time = form.cleaned_data.get('time')
+            is_qom_tehran = form.cleaned_data.get('is_qom_tehran', False)
+            return redirect('/alibaba')
+            return render(request, "success.html")
     else:
         form = TicketForm()
 
