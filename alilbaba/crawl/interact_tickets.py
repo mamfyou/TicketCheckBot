@@ -51,7 +51,7 @@ class InteractTickets:
 
         for index, ticket in enumerate(tickets):
             ticket_time = ticket.css('.md\\:flex-row:nth-child(1) .font-bold::text').extract_first()
-            if ticket_time in self.departure_times:
+            if ticket_time in self.departure_times or len(self.departure_times) == 0:
                 button = ticket.css('.last\\:mb-0 button').extract_first()
                 if button:
                     self.choose_ticket(index)
