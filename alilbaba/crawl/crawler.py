@@ -12,14 +12,14 @@ from persiantools.jdatetime import JalaliDate
 
 
 class AlibabaCrawler:
-    def __init__(self, username='mamf',
-                 date_str: str = datetime.datetime.now().strftime('%Y-%m-%d'),
+    def __init__(self, date_str: str,
+                 username='mamf',
                  QToT: bool = True):
+
         self.username = username
         self.date_str = date_str
-        date = self.get_jalali_date_from_gregorian()
         route = 'QUM-THR' if QToT else 'THR-QUM'
-        self.BASE_URL = f'https://www.alibaba.ir/train/{route}?adult=1&child=0&infant=0&ticketType=Family&isExclusive=false&&departing={date}'
+        self.BASE_URL = f'https://www.alibaba.ir/train/{route}?adult=1&child=0&infant=0&ticketType=Family&isExclusive=false&&departing={date_str}'
 
     def get_jalali_date_from_gregorian(self):
         year, month, day = map(int, self.date_str.split("-"))

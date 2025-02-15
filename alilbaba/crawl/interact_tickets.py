@@ -1,3 +1,5 @@
+import time
+
 import winsound
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -5,7 +7,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 class InteractTickets:
-    def __init__(self, scrapy, driver, departure_times: list = list):
+    def __init__(self, scrapy, driver, departure_times: list = ()):
         self.scrapy = scrapy
         self.driver = driver
         self.departure_times = departure_times
@@ -33,22 +35,26 @@ class InteractTickets:
         submit_button.click()
 
     def get_tickets(self):
-        tickets: list = self.scrapy.css('.last\:mb-0')
+        time.sleep(1)
+        tickets: list = self.scrapy.css('.last\\:mb-0')
         return tickets
 
     def choose_ticket(self, ticket_index):
         choose_ticket_buttons = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_all_elements_located((By.CSS_SELECTOR, '.last\:mb-0 button'))
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, '.last\\:mb-0 button'))
         )
         choose_ticket_button = choose_ticket_buttons[ticket_index]
         choose_ticket_button.click()
 
     def get_first_desired_ticket(self) -> bool:
         tickets = self.get_tickets()
+
         for index, ticket in enumerate(tickets):
-            ticket_time = ticket.css('.md\:flex-row:nth-child(1) .font-bold::text').extract_first()
+            ticket_time = ticket.css('.md\\:flex-row:nth-child(1) .font-bold::text').extract_first()
+            print(ticket_time)
+            print(self.departure_times)
             if ticket_time in self.departure_times:
-                button = ticket.css('.last\:mb-0 button').extract_first()
+                button = ticket.css('.last\\:mb-0 button').extract_first()
                 if button:
                     self.choose_ticket(index)
 
