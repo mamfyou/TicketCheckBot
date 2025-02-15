@@ -3,7 +3,6 @@ import json
 from datetime import datetime
 
 import httpx
-from httpx import RemoteProtocolError
 
 
 class TrainRequestHandler:
@@ -43,10 +42,12 @@ class TrainRequestHandler:
     def get_ticket_data(self):
         data = self.prepare_request_data()
         url = 'https://ws.alibaba.ir/api/v2/train/available/' + data
+        print(url)
         response = httpx.get(url, headers=self.get_request_headers(), timeout=15)
         try:
             return response.json()['result']['departing']
-        except RemoteProtocolError as e:
+        except Exception as e:
+            print(response.text)
             return []
 
     def get_date_from_date_string(self, date_str):
