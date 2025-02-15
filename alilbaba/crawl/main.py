@@ -4,10 +4,10 @@ from alilbaba.crawl.crawler import AlibabaCrawler
 from alilbaba.crawl.interact_tickets import InteractTickets
 
 
-def search_for_ticket():
+def search_for_ticket(QToT=True):
     channels_list = set()
 
-    crawler = AlibabaCrawler()
+    crawler = AlibabaCrawler(QToT=QToT)
     scrapy, driver = crawler.scrapy_tickets_page()
 
     interactor = InteractTickets(driver=driver, scrapy=scrapy)
@@ -22,4 +22,4 @@ def search_for_ticket():
 
 
 if __name__ == '__main__':
-    search_for_ticket()
+    search_for_ticket(QToT=False)

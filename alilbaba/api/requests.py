@@ -13,20 +13,11 @@ class TrainRequestHandler:
         self.departure_time = departure_time
 
     def prepare_request_data(self):
-        data = {'From': self.from_city,
-                'To': self.to_city,
+        data = {'From': self.from_city, 'To': self.to_city,
                 'DepartureDate': self.date.strftime('%Y-%m-%d') + 'T00:00:00',
-                'TicketType': 1,
-                'IsExclusiveCompartment': False,
-                'PassengerCount': 1,
-                'ReturnDate': None,
-                'ServiceType': None,
-                'Channel': 1,
-                'AvailableTargetType': None,
-                'Requester': None,
-                'UserId': 501936975,
-                'OnlyWithHotel': False,
-                'ForceUpdate': None
+                'TicketType': 1, 'IsExclusiveCompartment': False, 'PassengerCount': 1, 'ReturnDate': None,
+                'ServiceType': None, 'Channel': 1, 'AvailableTargetType': None, 'Requester': None,
+                'UserId': 501936975, 'OnlyWithHotel': False, 'ForceUpdate': None
                 }
         json_data = json.dumps(data)
         encoded_data = base64.b64encode(json_data.encode('utf-8'))
@@ -42,7 +33,7 @@ class TrainRequestHandler:
     def get_ticket_data(self):
         data = self.prepare_request_data()
         url = 'https://ws.alibaba.ir/api/v2/train/available/' + data
-        print(url)
+
         response = httpx.get(url, headers=self.get_request_headers(), timeout=15)
         try:
             return response.json()['result']['departing']

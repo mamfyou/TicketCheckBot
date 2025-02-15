@@ -1,7 +1,7 @@
-import time
-
 import winsound
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class InteractTickets:
@@ -14,12 +14,17 @@ class InteractTickets:
         winsound.Beep(700, 1000)
 
     def choose_passenger(self, order: int = 1):
-        passengers_list_button = self.driver.find_element(By.XPATH,
-                                                          '/html/body/div[1]/div[1]/main/form/div[3]/div/div[1]/div[1]/div/button')
+        passengers_list_button = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH,
+                                            '/html/body/div[1]/div[1]/main/form/div[3]/div/div[1]/div[1]/div/button')
+                                           ))
         passengers_list_button.click()
 
-        passenger_choose_button = self.driver.find_element(By.XPATH,
-                                                           f'/html/body/div[1]/div[2]/div/div/div/div[3]/table/tbody/tr[{order}]/td[4]/button')
+        passenger_choose_button = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH,
+                                            f'/html/body/div[1]/div[2]/div/div/div/div[3]/table/tbody/tr[{order}]/td[4]/button')
+                                           ))
+
         passenger_choose_button.click()
 
     def submit_ticket(self):
@@ -32,7 +37,10 @@ class InteractTickets:
         return tickets
 
     def choose_ticket(self, ticket_index):
-        choose_ticket_button = self.driver.find_elements(By.CSS_SELECTOR, '.last\:mb-0 button')[ticket_index]
+        choose_ticket_buttons = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, '.last\:mb-0 button'))
+        )
+        choose_ticket_button = choose_ticket_buttons[ticket_index]
         choose_ticket_button.click()
 
     def get_first_desired_ticket(self) -> bool:
