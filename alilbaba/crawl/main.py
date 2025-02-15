@@ -5,7 +5,7 @@ from scrapy.http import HtmlResponse
 from alilbaba.crawl.crawler import AlibabaCrawler
 from alilbaba.crawl.interact_tickets import InteractTickets
 
-DEPARTURE_TIMES = ['15:00']
+DEPARTURE_TIMES = ['09:00']
 DATE = '1403-12-10'
 
 
@@ -26,4 +26,4 @@ def search_for_ticket(QToT=True):
 
 
 if __name__ == '__main__':
-    search_for_ticket(QToT=False)
+    search_for_ticket(QToT=True)
