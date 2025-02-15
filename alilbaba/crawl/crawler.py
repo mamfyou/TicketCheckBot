@@ -1,4 +1,3 @@
-import datetime
 import os
 
 from scrapy.http import HtmlResponse
@@ -8,7 +7,6 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from persiantools.jdatetime import JalaliDate
 
 
 class AlibabaCrawler:
@@ -20,11 +18,6 @@ class AlibabaCrawler:
         self.date_str = date_str
         route = 'QUM-THR' if QToT else 'THR-QUM'
         self.BASE_URL = f'https://www.alibaba.ir/train/{route}?adult=1&child=0&infant=0&ticketType=Family&isExclusive=false&&departing={date_str}'
-
-    def get_jalali_date_from_gregorian(self):
-        year, month, day = map(int, self.date_str.split("-"))
-        jalali_date = JalaliDate.to_jalali(year, month, day)
-        return jalali_date
 
     def get_chrome_options(self):
         chrome_options = Options()
