@@ -18,7 +18,6 @@ def search_for_ticket(QToT=True):
         interactor = InteractTickets(driver=driver, scrapy=scrapy, departure_times=DEPARTURE_TIMES)
         is_done = interactor.get_first_desired_ticket()
         if is_done:
-            print('done')
             time.sleep(15 * 60)
             break
         else:
