@@ -25,7 +25,7 @@ class AlibabaCrawler:
     def get_chrome_options(self):
         chrome_options = Options()
         if os.name == 'nt':  # Windows
-            chrome_options.add_argument(f"user-data-dir=C:/Users/{self.username}/AppData/Local/Google/Chrome/User Data")
+            chrome_options.add_argument(f"user-data-dir=C:/Users/{self.username}14041/AppData/Local/Google/Chrome/User Data")
         else:  # Linux/Mac
             chrome_options.add_argument(f"user-data-dir=/home/{self.username}/.config/google-chrome")
         chrome_options.add_argument("profile-directory=Default")
