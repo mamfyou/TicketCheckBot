@@ -27,7 +27,7 @@ class AlibabaCrawler:
         os_type = platform.system()
 
         if os_type == "Windows":
-            user_profile = os.path.expandvars(r"%LOCALAPPDATA%\Google\Chrome\User Data")
+            user_profile = os.path.expandvars(r"%LOCALAPPDATA%\Google\Chrome\User Data\Profile 1")
         elif os_type == "Darwin":
             user_profile = os.path.expanduser("~/Library/Application Support/Google/Chrome")
         elif os_type == "Linux":
@@ -58,7 +58,15 @@ class AlibabaCrawler:
     def scrapy_tickets_page(self) -> tuple[HtmlResponse, webdriver.Chrome]:
         driver = self.get_chrome_driver()
         driver.get(self.BASE_URL)
-        time.sleep(30)
+
+        try:
+            button = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, '.relative.hover\\:bg-grays-100 > span'))
+            )
+            if 'ورود' in button.text:
+                time.sleep(60)
+        except Exception as e:
+            print(e)
 
         try:
             WebDriverWait(driver, 10).until(

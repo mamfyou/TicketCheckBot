@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
     print(Fore.YELLOW + 'Please wait...')
     time.sleep(1)
-    print(Fore.GREEN + 'Bot Waits for 30 seconds for you to login to website')
+    print(Fore.GREEN + 'If you\'re logged out, Bot Waits 1 minute for you to login to website')
     print(Fore.GREEN + 'And after that the crawling will begin')
     time.sleep(3)
 
