@@ -3,10 +3,10 @@ import time
 from colorama import init, Fore
 from scrapy.http import HtmlResponse
 
-from alilbaba.crawl.crawler import AlibabaCrawler
-from alilbaba.crawl.helper import Notifier
-from alilbaba.crawl.input_handler import UserInputHandler
-from alilbaba.crawl.interact_tickets import InteractTickets
+from alibaba.crawl.crawler import AlibabaCrawler
+from alibaba.crawl.helper import Notifier
+from alibaba.crawl.input_handler import UserInputHandler
+from alibaba.crawl.interact_tickets import InteractTickets
 
 init(autoreset=True)
 

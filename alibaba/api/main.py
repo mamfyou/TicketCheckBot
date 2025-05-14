@@ -2,7 +2,7 @@ import datetime
 import time
 
 import winsound
-from alilbaba.api.requests import TrainRequestHandler
+from alibaba.api.requests import TrainRequestHandler
 
 
 def main():
