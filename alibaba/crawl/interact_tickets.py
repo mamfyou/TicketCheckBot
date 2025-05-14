@@ -4,6 +4,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
+from alibaba.crawl.helper import Notifier
+
 
 class InteractTickets:
     def __init__(self, scrapy, driver, departure_times: list = list, order_of_passenger: int = 1):
