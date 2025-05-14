@@ -1,32 +1,26 @@
 import time
 
-import winsound
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 
 class InteractTickets:
-    def __init__(self, scrapy, driver, departure_times: list = ()):
+    def __init__(self, scrapy, driver, departure_times: list = list, order_of_passenger: int = 1):
         self.scrapy = scrapy
         self.driver = driver
         self.departure_times = departure_times
+        self.order = order_of_passenger
 
-    def notify_user(self):
-        winsound.Beep(700, 1000)
-
-    def choose_passenger(self, order: int = 1):
+    def choose_passenger(self):
         passengers_list_button = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH,
-                                            '/html/body/div[1]/div[1]/main/form/div[3]/div/div[1]/div[1]/div/button')
-                                           ))
+                                            '/html/body/div[1]/div[1]/main/form/div[3]/div/div[1]/div[1]/div/button')))
         passengers_list_button.click()
 
         passenger_choose_button = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH,
-                                            f'/html/body/div[1]/div[2]/div/div/div/div[3]/table/tbody/tr[{order}]/td[4]/button')
-                                           ))
-
+                                            f'/html/body/div[1]/div[2]/div/div/div/div[3]/table/tbody/tr[{self.order}]/td[4]/button')))
         passenger_choose_button.click()
 
     def submit_ticket(self):
@@ -43,8 +37,7 @@ class InteractTickets:
         choose_ticket_buttons = WebDriverWait(self.driver, 10).until(
             EC.presence_of_all_elements_located((By.CSS_SELECTOR, '.last\\:mb-0 button'))
         )
-        choose_ticket_button = choose_ticket_buttons[ticket_index]
-        choose_ticket_button.click()
+        choose_ticket_buttons[ticket_index].click()
 
     def get_first_desired_ticket(self) -> bool:
         tickets = self.get_tickets()
@@ -55,12 +48,8 @@ class InteractTickets:
                 button = ticket.css('.last\\:mb-0 button').extract_first()
                 if button:
                     self.choose_ticket(index)
-
-                    self.choose_passenger(order=2)
-
+                    self.choose_passenger()
                     self.submit_ticket()
-
-                    self.notify_user()
+                    Notifier.beep()
                     return True
-
         return False
