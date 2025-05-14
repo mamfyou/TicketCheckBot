@@ -12,8 +12,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 
 class AlibabaCrawler:
-    def __init__(self, date_str: str, user_name: str = 'mamf', is_qom_to_teh: bool = True):
-        self.username = user_name
+    def __init__(self, date_str: str, is_qom_to_teh: bool = True):
+        self.username = os.getlogin()
         self.date_str = date_str
         route = 'QUM-THR' if is_qom_to_teh else 'THR-QUM'
         self.BASE_URL = (f'https://www.alibaba.ir/train/{route}'

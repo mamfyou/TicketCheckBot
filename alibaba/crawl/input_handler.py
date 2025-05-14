@@ -12,10 +12,9 @@ class UserInputHandler:
         times = self.get_time_input()
         is_qom_to_teh = self.get_route_input()
         order = self.get_passenger_order()
-        username = self.get_username()
 
         print(Fore.GREEN + "\n✅ Inputs are valid! Processing your request...")
-        return username, date, times, is_qom_to_teh, order
+        return date, times, is_qom_to_teh, order
 
     def get_date_input(self):
         while True:
@@ -54,6 +53,3 @@ class UserInputHandler:
             if order.isdigit():
                 return int(order)
             print(Fore.RED + "Please enter a valid integer.")
-
-    def get_username(self):
-        return input(Fore.MAGENTA + '👤 Enter your system username (e.g., ali): ').strip()

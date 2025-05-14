@@ -11,8 +11,8 @@ from alibaba.crawl.interact_tickets import InteractTickets
 init(autoreset=True)
 
 
-def search_for_ticket(username, t_date, t_time, is_qom_to_teh, order):
-    crawler = AlibabaCrawler(is_qom_to_teh=is_qom_to_teh, date_str=t_date, user_name=username)
+def search_for_ticket(t_date, t_time, is_qom_to_teh, order):
+    crawler = AlibabaCrawler(is_qom_to_teh=is_qom_to_teh, date_str=t_date)
     scrapy, driver = crawler.scrapy_tickets_page()
 
     while True:
@@ -30,7 +30,7 @@ def search_for_ticket(username, t_date, t_time, is_qom_to_teh, order):
 
 if __name__ == '__main__':
     inputs = UserInputHandler()
-    username, t_date, t_time, is_qom_to_teh, order = inputs.get_inputs()
+    t_date, t_time, is_qom_to_teh, order = inputs.get_inputs()
 
     print(Fore.MAGENTA + 'Attention:')
     time.sleep(1)
@@ -51,4 +51,4 @@ if __name__ == '__main__':
     print(Fore.GREEN + 'And after that the crawling will begin')
     time.sleep(3)
 
-    search_for_ticket(username=username, t_date=t_date, t_time=t_time, is_qom_to_teh=is_qom_to_teh, order=order)
+    search_for_ticket(t_date=t_date, t_time=t_time, is_qom_to_teh=is_qom_to_teh, order=order)
