@@ -49,7 +49,7 @@ class UserInputHandler:
 
     def get_passenger_order(self):
         while True:
-            order = input(Fore.BLUE + 'Enter the order of your passenger: ')
+            order = input(Fore.BLUE + 'Enter the order of your saved passenger in Alibaba (e.g. 1): ')
             if order.isdigit():
                 return int(order)
             print(Fore.RED + "Please enter a valid integer.")
