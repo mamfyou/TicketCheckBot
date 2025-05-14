@@ -15,6 +15,14 @@ class InteractTickets:
         self.order = order_of_passenger
 
     def choose_passenger(self):
+        try:
+            button = WebDriverWait(self.driver, 2).until(
+                EC.presence_of_element_located((By.XPATH, '/html/body/div/div[2]/div/div/div[1]/button'))
+            )
+            button.click()
+        except Exception as e:
+            pass
+
         passengers_list_button = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH,
                                             '/html/body/div[1]/div[1]/main/form/div[3]/div/div[1]/div[1]/div/button')))
